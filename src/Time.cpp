@@ -10,11 +10,11 @@ void setDateTime(DateTime &current,int day,int month,int year);
 bool isValid(DateTime date);
 bool isLeapYear(int year);
 DateTime findNextDate(DateTime current);
-int countDateInYear(DateTime current);
+int findPositionDateInYear(DateTime current);
 int findDistance(DateTime begin, DateTime end);
 void printDateTime(DateTime current);
 void printNextDate(DateTime current);
-void printNumberOfDateInYear(DateTime current); 
+void printPositionOfDateInYear(DateTime current); 
 void printDistance(DateTime begin, DateTime end);
 int main(){
     DateTime begin,end;
@@ -23,7 +23,7 @@ int main(){
     enter(end);
     printDateTime(end);
     printNextDate(begin);
-    printNumberOfDateInYear(begin);
+    printPositionOfDateInYear(begin);
     printDistance(begin,end);
     return 0;
 }
@@ -90,16 +90,16 @@ DateTime findNextDate(DateTime current){
     }
     return next_date;
 }
-int countDateInYear(DateTime current){
-    int counter = 0;
-    for(int month=1;month<current.month;month++){
-        counter+= times[month-1];//do dùng mảng, mảng bắt đầu từ 0
+int findPositionDateInYear(DateTime current){
+    int position = 0;
+    for(int month=1;month<current.month;month++){// đếm những ngày trong tháng trước tháng đó
+        position+= times[month-1];//do dùng mảng, mảng bắt đầu từ 0
     }
-    counter+=current.day;
-    if(current.month>2){// năm nhuận có hơn 1 ngày
-        counter+=1;
+    position+=current.day;
+    if(isLeapYear(current.year)&&current.month>2){// năm nhuận có hơn 1 ngày
+        position+=1;
     }
-    return counter;
+    return position;
 }
 int findDistance(DateTime begin, DateTime end){
     int counter = 0;
@@ -123,7 +123,7 @@ int findDistance(DateTime begin, DateTime end){
         if(begin.year%4==0){
             number_of_begin_date +=1;
         }
-        counter += (number_of_begin_date-countDateInYear(begin)) + countDateInYear(end);
+        counter += (number_of_begin_date-findPositionDateInYear(begin)) + findPositionDateInYear(end);
     }
     return counter;
 }
@@ -136,9 +136,9 @@ void printNextDate(DateTime current){
     printf("\nnext date:");
     printDateTime(next_date);
 }
-void printNumberOfDateInYear(DateTime current){
-    int counter = countDateInYear(current);
-    printf("\ncurrent day at %d in year",counter);
+void printPositionOfDateInYear(DateTime current){
+    int position = findPositionDateInYear(current);
+    printf("\ncurrent day at %d in year",position);
 }
 void printDistance(DateTime begin, DateTime end){
     int distance = findDistance(begin,end);
