@@ -1,4 +1,5 @@
 #include<stdio.h>
+const int times[12] = {31,28,31,30,31,30,31,31,30,31,30,31};//thoi gian binh thường tu ngày từ tháng 1 đến tháng 12
 typedef struct DateTime{
     int day;
     int month;
@@ -9,18 +10,26 @@ void setDateTime(DateTime &current,int day,int month,int year);
 bool isValid(DateTime date);
 bool isLeapYear(int year);
 DateTime findNextDate(DateTime current);
+int countDateInYear(DateTime current);
+int findDistance(DateTime begin, DateTime end);
 void printDateTime(DateTime current);
 void printNextDate(DateTime current);
+void printNumberOfDateInYear(DateTime current); 
+void printDistance(DateTime begin, DateTime end);
 int main(){
-    DateTime date;
-    enter(date);
-    printDateTime(date);
-    printNextDate(date);
+    DateTime begin,end;
+    enter(begin);
+    printDateTime(begin);
+    enter(end);
+    printDateTime(end);
+    printNextDate(begin);
+    printNumberOfDateInYear(begin);
+    printDistance(begin,end);
     return 0;
 }
 void enter(DateTime &date){
     do{
-        printf("Enter date:");
+        printf("\nEnter date:");
         scanf("%d%d%d",&date.day,&date.month,&date.year);
     }while(!isValid(date));
 }
@@ -62,7 +71,6 @@ bool isLeapYear(int year){
 }
 DateTime findNextDate(DateTime current){
     DateTime next_date; 
-    int times[12] = {31,28,31,30,31,30,31,31,30,31,30,31};//thoi gian binh thường tu ngày từ tháng 1 đến tháng 12
     if(current.month==12 && current.day== 31){// ngày cuối năm
         setDateTime(next_date,1,1,current.year+1);
     } 
@@ -82,6 +90,43 @@ DateTime findNextDate(DateTime current){
     }
     return next_date;
 }
+int countDateInYear(DateTime current){
+    int counter = 0;
+    for(int month=1;month<current.month;month++){
+        counter+= times[month-1];//do dùng mảng, mảng bắt đầu từ 0
+    }
+    counter+=current.day;
+    if(current.month>2){// năm nhuận có hơn 1 ngày
+        counter+=1;
+    }
+    return counter;
+}
+int findDistance(DateTime begin, DateTime end){
+    int counter = 0;
+    if(begin.year > end.year){
+        printf("\nbefore date must larger than last date");
+    }
+    else if(begin.month > end.month){
+        printf("\nbefore date must larger than last date");
+    }
+    else if(begin.day > end.day){
+        printf("\nbefore date must larger than last date");
+    }
+    else{
+        int number_of_begin_date = 365;
+        for(int year = begin.year+1; year < end.year;year++){// kiểm tra từ năm sau khi bắt đầu đến năm gần với năm kết thúc
+            counter+=365;
+            if(year%4==0){
+                counter++;
+            }
+        }
+        if(begin.year%4==0){
+            number_of_begin_date +=1;
+        }
+        counter += (number_of_begin_date-countDateInYear(begin)) + countDateInYear(end);
+    }
+    return counter;
+}
 void printDateTime(DateTime date){
     printf("%d/%d/%d",date.day,date.month,date.year);
 }
@@ -90,4 +135,16 @@ void printNextDate(DateTime current){
     DateTime next_date = findNextDate(current);
     printf("\nnext date:");
     printDateTime(next_date);
+}
+void printNumberOfDateInYear(DateTime current){
+    int counter = countDateInYear(current);
+    printf("\ncurrent day at %d in year",counter);
+}
+void printDistance(DateTime begin, DateTime end){
+    int distance = findDistance(begin,end);
+    printf("\nDistance of ");
+    printDateTime(begin);
+    printf(" and ");
+    printDateTime(end);
+    printf(": %d days",distance);
 }
