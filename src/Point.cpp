@@ -7,12 +7,19 @@ typedef struct Point{
 void enter(Point &input);
 void setPoint(Point &setter, int x, int y);
 float findDistance(Point start,Point end);
+bool belongToFirstQuadrant(Point source);
+bool belongToSecondQuadrant(Point source);
+bool belongToThirdQuadrant(Point source);
+bool belongToFourthQuadrant(Point source);
 Point findPointNearHorizontal(Point first, Point second);
 Point findPointNearVertical(Point first, Point second);
 Point findPointNearOrigin(Point first, Point second);
 Point findPointSymetricHorizontal(Point source);
 Point findPointSymetricVertical(Point source);
 Point findPointSymetricOrigin(Point source);
+Point findPointSymetricFirstBisector(Point source);// tự làm
+Point findPointSymetricSecondBisector(Point source);// tự làm
+void checkQuadrant(Point source);// kiểm tra 1 điểm xem điểm đó ở góc phần tư thứ mấy
 void printPoint(Point output);
 void printPointSymetricHorizontal(Point source);
 void printPointSymetricVertical(Point source);
@@ -21,6 +28,7 @@ void printDistance(Point start,Point end);
 void printPointNearHorizontal(Point first, Point second);
 void printPointNearVertical(Point first, Point second);
 void printPointNearOrigin(Point first, Point second);
+void menu(Point start, Point end);// tự làm
 int main(){
     Point start,end;
     enter(start);
@@ -36,6 +44,7 @@ int main(){
     printPointSymetricHorizontal(start);
     printPointSymetricVertical(start);
     printPointSymetricOrigin(start);
+    checkQuadrant(start);
     return 0;
 }
 void enter(Point &input){
@@ -97,6 +106,32 @@ Point findPointSymetricOrigin(Point source){
     Point dest;
     setPoint(dest,-source.x,-source.y);
     return dest;
+}
+bool belongToFirstQuadrant(Point source){
+    return source.x>0 && source.y>0;
+}
+bool belongToSecondQuadrant(Point source){
+    return source.x<0 && source.y>0;
+}
+bool belongToThirdQuadrant(Point source){
+    return source.x<0 && source.y<0;
+}
+bool belongToFourthQuadrant(Point source){
+    return source.x>0 && source.y<0;
+}
+void checkQuadrant(Point source){
+    if(belongToFirstQuadrant(source)){
+        printf("\npoint belong to first quadrant!");
+    }
+    else if(belongToSecondQuadrant(source)){
+        printf("\npoint belong to second quadrant!");
+    }
+    else if(belongToThirdQuadrant(source)){
+        printf("\npoint belong to third quadrant!");
+    }
+    else{
+        printf("\npoint not belong to fourth quadrant!");
+    }
 }
 void printPointNearHorizontal(Point first, Point second){
     Point near_horizontal = findPointNearHorizontal(first,second);
