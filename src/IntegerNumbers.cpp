@@ -1,8 +1,11 @@
 #include<stdio.h>
 #define MAXSIZE 50
+int swap(int &source, int &dest);
 void enter(int numbers[],int &amount_numbers);
 int findMaxValue(int numbers[], int amount_numbers);
 int finMinValue(int numbers[], int amount_numbers);
+void ascSort(int numbers[],int amount_numbers);
+void descSort(int numbers[],int amount_numbers);
 void printValues(int numbers[], int amount_numbers);
 void printMaxValue(int numbers[], int amount_numbers);
 void printMinValue(int numbers[], int amount_numbers);
@@ -24,6 +27,15 @@ int main(){
     digitsPositionOfEvenNumbers(numbers,amount_numbers);// xuat vi tri so chan
     digitsPositionOfOddNumbers(numbers,amount_numbers);// xuat vi tri so le
     digitsPostionOfNumberByValue(numbers,amount_numbers,searchNumber);//liệt kê vị trí bởi giá trị cần tìm
+    ascSort(numbers,amount_numbers);// sắp xếp tăng dần
+    printValues(numbers,amount_numbers);// xuất sau khi sắp xếp
+    descSort(numbers,amount_numbers); // sắp xếp giảm dần
+    printValues(numbers,amount_numbers);// xuất sau khi sắp xếp
+}
+int swap(int &source, int &dest){
+    int temp = source;
+    source = dest;
+    dest = temp;
 }
 void enter(int numbers[], int &amount_numbers){
     int temp;
@@ -110,6 +122,24 @@ void digitsPostionOfNumberByValue(int numbers[], int amount_numbers,int searchNu
     for(int index = 0; index < amount_numbers;index++){
         if(numbers[index]==searchNumber){
             printf("%d ",index);
+        }
+    }
+}
+void ascSort(int numbers[],int amount_numbers){
+    for(int index = 0; index < amount_numbers-1;index++){
+        for(int next_index = index+1;next_index<amount_numbers;next_index++){
+            if(numbers[index]>numbers[next_index]){
+                swap(numbers[index],numbers[next_index]);// hoán vị 2 số
+            }
+        }
+    }
+}
+void descSort(int numbers[],int amount_numbers){
+    for(int index = 0; index < amount_numbers-1;index++){
+        for(int next_index = index+1;next_index<amount_numbers;next_index++){
+            if(numbers[index]<numbers[next_index]){
+                swap(numbers[index],numbers[next_index]);// hoán vị 2 số
+            }
         }
     }
 }
