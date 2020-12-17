@@ -64,6 +64,16 @@ void enter(int numbers[], int &amount_numbers){
         numbers[index] = temp;
     }
 }
+int countNumberOfPrimeNumbers(int numbers[], int amount_numbers){
+    int counter = 0;
+    for(int index = 0;index < amount_numbers;index++){
+        int check_number = numbers[index];
+        if(isPrimeNumber(check_number)){
+            counter++;
+        }
+    }
+    return counter;
+}
 void printValues(int numbers[], int amount_numbers){
     printf("\nprint value of number: ");
     for (int index = 0; index < amount_numbers; index++)
@@ -93,6 +103,24 @@ int findMinValue(int numbers[], int amount_numbers){
     }
     return min;
 }
+void ascSort(int numbers[],int amount_numbers){
+    for(int index = 0; index < amount_numbers-1;index++){
+        for(int next_index = index+1;next_index<amount_numbers;next_index++){
+            if(numbers[index]>numbers[next_index]){
+                swap(numbers[index],numbers[next_index]);// hoán vị 2 số
+            }
+        }
+    }
+}
+void descSort(int numbers[],int amount_numbers){
+    for(int index = 0; index < amount_numbers-1;index++){
+        for(int next_index = index+1;next_index<amount_numbers;next_index++){
+            if(numbers[index]<numbers[next_index]){
+                swap(numbers[index],numbers[next_index]);// hoán vị 2 số
+            }
+        }
+    }
+}
 void printMaxValue(int numbers[], int amount_numbers){
     int max = findMaxValue(numbers,amount_numbers);
     printf("\n Max of number is: %d",max);
@@ -100,6 +128,10 @@ void printMaxValue(int numbers[], int amount_numbers){
 void printMinValue(int numbers[], int amount_numbers){
     int min = findMinValue(numbers,amount_numbers);
     printf("\n Min of number is: %d",min);
+}
+void printNumberOfPrimeNumbers(int numbers[], int amount_numbers){
+    int counter = countNumberOfPrimeNumbers(numbers,amount_numbers);
+    printf("\nnumber of prime numbers: %d",counter);
 }
 void digitsEvenNumbers(int numbers[], int amount_numbers){
     printf("\nlist of even number in numbers: ");
@@ -141,24 +173,6 @@ void digitsPostionOfNumberByValue(int numbers[], int amount_numbers,int searchNu
         }
     }
 }
-void ascSort(int numbers[],int amount_numbers){
-    for(int index = 0; index < amount_numbers-1;index++){
-        for(int next_index = index+1;next_index<amount_numbers;next_index++){
-            if(numbers[index]>numbers[next_index]){
-                swap(numbers[index],numbers[next_index]);// hoán vị 2 số
-            }
-        }
-    }
-}
-void descSort(int numbers[],int amount_numbers){
-    for(int index = 0; index < amount_numbers-1;index++){
-        for(int next_index = index+1;next_index<amount_numbers;next_index++){
-            if(numbers[index]<numbers[next_index]){
-                swap(numbers[index],numbers[next_index]);// hoán vị 2 số
-            }
-        }
-    }
-}
 void digitsPrimeNumbers(int numbers[], int amount_numbers){
     printf("\nlist of prime numbers: ");
     for(int index = 0;index < amount_numbers;index++){
@@ -167,18 +181,4 @@ void digitsPrimeNumbers(int numbers[], int amount_numbers){
             printf(" %d ",numbers[index]);
         }
     }
-}
-int countNumberOfPrimeNumbers(int numbers[], int amount_numbers){
-    int counter = 0;
-    for(int index = 0;index < amount_numbers;index++){
-        int check_number = numbers[index];
-        if(isPrimeNumber(check_number)){
-            counter++;
-        }
-    }
-    return counter;
-}
-void printNumberOfPrimeNumbers(int numbers[], int amount_numbers){
-    int counter = countNumberOfPrimeNumbers(numbers,amount_numbers);
-    printf("\nnumber of prime numbers: %d",counter);
 }
