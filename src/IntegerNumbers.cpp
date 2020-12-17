@@ -6,6 +6,10 @@ int finMinValue(int numbers[], int amount_numbers);
 void printValues(int numbers[], int amount_numbers);
 void printMaxValue(int numbers[], int amount_numbers);
 void printMinValue(int numbers[], int amount_numbers);
+void digitsEvenNumbers(int numbers[], int amount_numbers);
+void digitsPositionOfEvenNumbers(int numbers[], int amount_numbers);
+void digitsOddNumbers(int numbers[], int amount_numbers);
+void digitsPositionOfOddNumbers(int numbers[],int amount_numbers);
 int main(){
     int numbers[MAXSIZE];
     int amount_numbers;
@@ -13,6 +17,10 @@ int main(){
     printValues(numbers,amount_numbers);// xuat cac gia tri mang
     printMaxValue(numbers,amount_numbers);// xuất giá trị max
     printMinValue(numbers,amount_numbers);// xuat gia tri min
+    digitsEvenNumbers(numbers,amount_numbers);// xuat so chan
+    digitsOddNumbers(numbers,amount_numbers); // xuat so le  
+    digitsPositionOfEvenNumbers(numbers,amount_numbers);// xuat vi tri so chan
+    digitsPositionOfOddNumbers(numbers,amount_numbers);// xuat vi tri so le
 }
 void enter(int numbers[], int &amount_numbers){
     int temp;
@@ -61,4 +69,36 @@ void printMaxValue(int numbers[], int amount_numbers){
 void printMinValue(int numbers[], int amount_numbers){
     int min = findMinValue(numbers,amount_numbers);
     printf("\n Min of number is: %d",min);
+}
+void digitsEvenNumbers(int numbers[], int amount_numbers){
+    printf("\nlist of even number in numbers: ");
+    for(int index = 0; index < amount_numbers;index++){
+        if(numbers[index] %2 ==0){
+            printf("%d ",numbers[index]);
+        }
+    }
+}
+void digitsPositionOfEvenNumbers(int numbers[], int amount_numbers){
+    printf("\nindex of even number in numbers: ");
+    for(int index = 0; index < amount_numbers;index++){
+        if(numbers[index] %2 ==0){
+            printf("%d ",index);
+        }
+    }
+}
+void digitsOddNumbers(int numbers[],int amount_numbers){
+    printf("\nlist of odd number in numbers: ");
+    for(int index = 0; index < amount_numbers;index++){
+        if(numbers[index] %2 !=0){
+            printf("%d ",numbers[index]);
+        }
+    }
+}
+void digitsPositionOfOddNumbers(int numbers[], int amount_numbers){
+    printf("\nindex of odd number in numbers: ");
+    for(int index = 0; index < amount_numbers;index++){
+        if(numbers[index] %2 !=0){
+            printf("%d ",index);
+        }
+    }
 }
