@@ -10,7 +10,11 @@ float findDistance(Point start,Point end);
 Point findPointNearHorizontal(Point first, Point second);
 Point findPointNearVertical(Point first, Point second);
 Point findPointNearOrigin(Point first, Point second);
+Point findPointSymetricHorizontal(Point source);
+Point findPointSymetricVertical(Point source);
 void printPoint(Point output);
+void printPointSymetricHorizontal(Point source);
+void printPointSymetricVertical(Point source);
 void printDistance(Point start,Point end);
 void printPointNearHorizontal(Point first, Point second);
 void printPointNearVertical(Point first, Point second);
@@ -27,6 +31,8 @@ int main(){
     printPointNearHorizontal(start,end);
     printPointNearVertical(start,end);
     printPointNearOrigin(start,end);
+    printPointSymetricHorizontal(start);
+    printPointSymetricVertical(start);
     return 0;
 }
 void enter(Point &input){
@@ -74,18 +80,38 @@ Point findPointNearOrigin(Point first, Point second){
     float second_distance = findDistance(second,origin);
     return first_distance < second_distance ? first : second;
 }
+Point findPointSymetricHorizontal(Point source){
+    Point dest;
+    setPoint(dest,source.x,-source.y);
+    return dest;
+}
+Point findPointSymetricVertical(Point source){
+      Point dest;
+    setPoint(dest,-source.x,source.y);
+    return dest;
+}
 void printPointNearHorizontal(Point first, Point second){
     Point near_horizontal = findPointNearHorizontal(first,second);
-    printf("\n point near horizontal:");
+    printf("\npoint near horizontal:");
     printPoint(near_horizontal);
 }
 void printPointNearVertical(Point first, Point second){
     Point near_vertical = findPointNearVertical(first,second);
-    printf("\n point near vertical:");
+    printf("\npoint near vertical:");
     printPoint(near_vertical);
 }
 void printPointNearOrigin(Point first, Point second){
     Point near_origin = findPointNearOrigin(first,second);
-    printf("\n point near origin:");
+    printf("\npoint near origin:");
     printPoint(near_origin);
+}
+void printPointSymetricHorizontal(Point source){
+    Point dest = findPointSymetricHorizontal(source);
+    printf("\npoint symetric horizontal:");
+    printPoint(dest);
+}
+void printPointSymetricVertical(Point source){
+    Point dest = findPointSymetricVertical(source);
+    printf("\npoint symetric vertical:");
+    printPoint(dest);
 }
