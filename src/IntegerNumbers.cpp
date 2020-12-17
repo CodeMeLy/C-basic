@@ -5,11 +5,13 @@ bool isPrimeNumber(int &check_number);
 void enter(int numbers[],int &amount_numbers);
 int findMaxValue(int numbers[], int amount_numbers);
 int finMinValue(int numbers[], int amount_numbers);
+int countNumberOfPrimeNumbers(int numbers[], int amount_numbers);
 void ascSort(int numbers[],int amount_numbers);
 void descSort(int numbers[],int amount_numbers);
 void printValues(int numbers[], int amount_numbers);
 void printMaxValue(int numbers[], int amount_numbers);
 void printMinValue(int numbers[], int amount_numbers);
+void printNumberOfPrimeNumbers(int numbers[], int amount_numbers);
 void digitsPostionOfNumberByValue(int numbers[], int amount_numbers,int searchNumber);
 void digitsEvenNumbers(int numbers[], int amount_numbers);
 void digitsPositionOfEvenNumbers(int numbers[], int amount_numbers);
@@ -29,11 +31,12 @@ int main(){
     digitsPositionOfEvenNumbers(numbers,amount_numbers);// xuat vi tri so chan
     digitsPositionOfOddNumbers(numbers,amount_numbers);// xuat vi tri so le
     digitsPostionOfNumberByValue(numbers,amount_numbers,searchNumber);//liệt kê vị trí bởi giá trị cần tìm
-    digitsPrimeNumbers(numbers,amount_numbers);
+    digitsPrimeNumbers(numbers,amount_numbers);// liệt kê số nguyên tố
     ascSort(numbers,amount_numbers);// sắp xếp tăng dần
     printValues(numbers,amount_numbers);// xuất sau khi sắp xếp
     descSort(numbers,amount_numbers); // sắp xếp giảm dần
     printValues(numbers,amount_numbers);// xuất sau khi sắp xếp
+    printNumberOfPrimeNumbers(numbers,amount_numbers);
 }
 int swap(int &source, int &dest){
     int temp = source;
@@ -42,8 +45,8 @@ int swap(int &source, int &dest){
 }
 bool isPrimeNumber(int &check_number){
     bool is_prime_number = true;
-    for(int previousNumber = 2; previousNumber<check_number;previousNumber++){
-        if(check_number%previousNumber==0){
+    for(int previous_number = 2; previous_number<check_number;previous_number++){
+        if(check_number%previous_number==0){
             is_prime_number = false;
             break;
         }
@@ -164,4 +167,18 @@ void digitsPrimeNumbers(int numbers[], int amount_numbers){
             printf(" %d ",numbers[index]);
         }
     }
+}
+int countNumberOfPrimeNumbers(int numbers[], int amount_numbers){
+    int counter = 0;
+    for(int index = 0;index < amount_numbers;index++){
+        int check_number = numbers[index];
+        if(isPrimeNumber(check_number)){
+            counter++;
+        }
+    }
+    return counter;
+}
+void printNumberOfPrimeNumbers(int numbers[], int amount_numbers){
+    int counter = countNumberOfPrimeNumbers(numbers,amount_numbers);
+    printf("\nnumber of prime numbers: %d",counter);
 }
