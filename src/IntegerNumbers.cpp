@@ -1,5 +1,10 @@
 #include<stdio.h>
 #define MAXSIZE 50
+enum Selector{
+    PRINT_VALUES = 1,PRINT_MAX_VALUE = 2,PRINT_MIN_VALUE = 3,PRINT_NUMBER_OF_PRIME = 4,
+    DIGITS_EVEN_NUMBER = 5, DIGITS_ODD_NUMBER = 6,DIGITS_EVEN_POSITION = 7,DIGITS_ODD_POSITION = 8,DIGITS_POSITION = 9,DIGITS_PRIME = 10, 
+    ASC_SORT = 11, DESC_SORT =12
+};
 int swap(int &source, int &dest);
 bool isPrimeNumber(int &check_number);
 void enter(int numbers[],int &amount_numbers);
@@ -18,25 +23,13 @@ void digitsPositionOfEvenNumbers(int numbers[], int amount_numbers);
 void digitsOddNumbers(int numbers[], int amount_numbers);
 void digitsPositionOfOddNumbers(int numbers[],int amount_numbers);
 void digitsPrimeNumbers(int numbers[], int amount_numbers);
+void menu(int numbers[], int amount_numbers);
 int main(){
     int numbers[MAXSIZE];
     int amount_numbers;
     int searchNumber = 4;
     enter(numbers,amount_numbers);// nhap các giá trị mảng
-    printValues(numbers,amount_numbers);// xuat cac gia tri mang
-    printMaxValue(numbers,amount_numbers);// xuất giá trị max
-    printMinValue(numbers,amount_numbers);// xuat gia tri min
-    digitsEvenNumbers(numbers,amount_numbers);// xuat so chan
-    digitsOddNumbers(numbers,amount_numbers); // xuat so le  
-    digitsPositionOfEvenNumbers(numbers,amount_numbers);// xuat vi tri so chan
-    digitsPositionOfOddNumbers(numbers,amount_numbers);// xuat vi tri so le
-    digitsPostionOfNumberByValue(numbers,amount_numbers,searchNumber);//liệt kê vị trí bởi giá trị cần tìm
-    digitsPrimeNumbers(numbers,amount_numbers);// liệt kê số nguyên tố
-    ascSort(numbers,amount_numbers);// sắp xếp tăng dần
-    printValues(numbers,amount_numbers);// xuất sau khi sắp xếp
-    descSort(numbers,amount_numbers); // sắp xếp giảm dần
-    printValues(numbers,amount_numbers);// xuất sau khi sắp xếp
-    printNumberOfPrimeNumbers(numbers,amount_numbers);
+    menu(numbers,amount_numbers);
 }
 int swap(int &source, int &dest){
     int temp = source;
@@ -181,4 +174,72 @@ void digitsPrimeNumbers(int numbers[], int amount_numbers){
             printf(" %d ",numbers[index]);
         }
     }
+}
+void menu(int numbers[], int amount_numbers){
+    int menu_option;
+    int exit_option;
+    do{
+        printf("\n---------------Menu-------------------");
+        printf("\n1. xuat cac gia tri mang");
+        printf("\n2. xuat cac gia tri max ");
+        printf("\n3. xuat cac gia tri min");
+        printf("\n4. xuat so luong so nguyen to");
+        printf("\n5. liet ke so chan");
+        printf("\n6. liet ke so le");
+        printf("\n7. liet ke vi tri so chan");
+        printf("\n8. liet ke vi tri so le");
+        printf("\n9. liet ke vi tri boi gia tri can tim");
+        printf("\n10. liet ke so nguyen to");
+        printf("\n11. sap xep tang dan");
+        printf("\n12. sap xep giam dan");
+        printf("\nselect option:");
+        scanf("%d",&menu_option);
+        switch(menu_option){
+            case PRINT_VALUES:
+                printValues(numbers,amount_numbers);
+                break;
+            case PRINT_MAX_VALUE:
+                printMaxValue(numbers,amount_numbers);
+                break;
+            case PRINT_MIN_VALUE:
+                printMinValue(numbers,amount_numbers);
+                break;
+            case PRINT_NUMBER_OF_PRIME:
+                printNumberOfPrimeNumbers(numbers,amount_numbers);
+                break;
+            case DIGITS_EVEN_NUMBER:
+                digitsEvenNumbers(numbers,amount_numbers);
+                break;
+            case DIGITS_ODD_NUMBER:
+                digitsOddNumbers(numbers,amount_numbers);
+                break;
+            case DIGITS_EVEN_POSITION:
+                digitsPositionOfEvenNumbers(numbers,amount_numbers);
+                break;
+            case DIGITS_ODD_POSITION:
+                digitsPositionOfOddNumbers(numbers,amount_numbers);
+                break;
+            case DIGITS_POSITION:
+                int search_number;
+                printf("enter value to find: ");
+                scanf("%d",&search_number);
+                digitsPostionOfNumberByValue(numbers,amount_numbers,search_number);
+                break;
+            case DIGITS_PRIME:
+                digitsPrimeNumbers(numbers,amount_numbers);
+                break;
+            case ASC_SORT:
+                ascSort(numbers,amount_numbers);
+                printValues(numbers,amount_numbers);
+                break;
+            case DESC_SORT:
+                descSort(numbers,amount_numbers);
+                printValues(numbers,amount_numbers);
+                break;
+            default:
+                printf("\noption is invalid!");
+        }
+        printf("\nDo you want exit? (enter 0 to exit)");
+        scanf("%d",&exit_option);
+    }while(exit_option);
 }
