@@ -6,6 +6,7 @@ int finMinValue(int numbers[], int amount_numbers);
 void printValues(int numbers[], int amount_numbers);
 void printMaxValue(int numbers[], int amount_numbers);
 void printMinValue(int numbers[], int amount_numbers);
+void digitsPostionOfNumberByValue(int numbers[], int amount_numbers,int searchNumber);
 void digitsEvenNumbers(int numbers[], int amount_numbers);
 void digitsPositionOfEvenNumbers(int numbers[], int amount_numbers);
 void digitsOddNumbers(int numbers[], int amount_numbers);
@@ -13,6 +14,7 @@ void digitsPositionOfOddNumbers(int numbers[],int amount_numbers);
 int main(){
     int numbers[MAXSIZE];
     int amount_numbers;
+    int searchNumber = 4;
     enter(numbers,amount_numbers);// nhap các giá trị mảng
     printValues(numbers,amount_numbers);// xuat cac gia tri mang
     printMaxValue(numbers,amount_numbers);// xuất giá trị max
@@ -21,6 +23,7 @@ int main(){
     digitsOddNumbers(numbers,amount_numbers); // xuat so le  
     digitsPositionOfEvenNumbers(numbers,amount_numbers);// xuat vi tri so chan
     digitsPositionOfOddNumbers(numbers,amount_numbers);// xuat vi tri so le
+    digitsPostionOfNumberByValue(numbers,amount_numbers,searchNumber);//liệt kê vị trí bởi giá trị cần tìm
 }
 void enter(int numbers[], int &amount_numbers){
     int temp;
@@ -98,6 +101,14 @@ void digitsPositionOfOddNumbers(int numbers[], int amount_numbers){
     printf("\nindex of odd number in numbers: ");
     for(int index = 0; index < amount_numbers;index++){
         if(numbers[index] %2 !=0){
+            printf("%d ",index);
+        }
+    }
+}
+void digitsPostionOfNumberByValue(int numbers[], int amount_numbers,int searchNumber){
+    printf("\nindex of %d: ",searchNumber);
+    for(int index = 0; index < amount_numbers;index++){
+        if(numbers[index]==searchNumber){
             printf("%d ",index);
         }
     }
