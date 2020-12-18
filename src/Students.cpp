@@ -19,7 +19,7 @@ void enter(DateTime &current);// sử dụng lại bài sửa rồi
 void enter(Student &input);
 void enter(Students &input);
 int countStudentsHaveScholarship(Students source);
-Students findStudentsByName(Students source, char name[]);
+Students findStudentsByName(Students source, char search_name[]);
 void printValue(DateTime output);
 void printValue(Student output);
 void printValue(Students output);
@@ -27,7 +27,7 @@ void printAmountStudentsHaveScholarship(Students source);
 void ascSortByGPA(Students &source);
 void ascSortByName(Students &source);
 void digitsStudentsHaveScholarship(Students source);
-void digitsStudentByName(Students source, char name[]);
+void digitsStudentByName(Students source, char search_name[]);
 int main(){
     Students list;
     char search_name[50];
@@ -166,19 +166,19 @@ void digitsStudentsHaveScholarship(Students source){
         }
     }
 }
-Students findStudentsByName(Students source,char name[]){
+Students findStudentsByName(Students source,char search_name[]){
     Students dest;
     dest.amount = 0;
     for(int position=0;position<source.amount;position++){
-        if(strcmp(source.students[position].name,name)==0){
+        if(strcmp(source.students[position].name,search_name)==0){
             dest.amount++;
             dest.students[dest.amount-1] = source.students[position];
         }
     }
     return dest;
 }
-void digitsStudentByName(Students source, char name[]){
-    Students dest = findStudentsByName(source, name);
+void digitsStudentByName(Students source, char search_name[]){
+    Students dest = findStudentsByName(source, search_name);
     for(int position = 0; position<dest.amount;position++){
         printValue(dest.students[position]);
     } 
