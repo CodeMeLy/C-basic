@@ -17,9 +17,13 @@ bool isValid(DateTime checker);
 void enter(DateTime &current);// sử dụng lại bài sửa rồi
 void enter(Student &input);
 void enter(Students &input);
+void printValue(DateTime output);
+void printValue(Student output);
+void printValue(Students output);
 int main(){
     Students list;
     enter(list);
+    printValue(list);
     return 0;
 }
 void enter(DateTime &date){
@@ -49,7 +53,7 @@ bool isLeapYear(int year){
 }
 bool isValid(DateTime date){
     bool is_valid = true;
-    if((date.month<1 && date.month >12)||(date.day<1)){
+    if((date.month<1 || date.month >12)||(date.day<1)){
         is_valid = false;
     }else{
         switch(date.month){
@@ -74,4 +78,18 @@ bool isValid(DateTime date){
         }
     }
     return is_valid;
+}
+void printValue(DateTime output){
+    printf("%d/%d/%d", output.day, output.month, output.year);
+}
+void printValue(Student output){
+    printf("\n{\"%s\", ",output.name);
+    printValue(output.date_of_birth);
+    printf(", %.2f}", output.gpa);
+}
+void printValue(Students output){
+    printf("\n list of students:");
+    for(int position=0; position<output.amount;position ++){
+        printValue(output.students[position]);
+    }
 }
