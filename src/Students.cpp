@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<string.h>
 #define MAXSIZE 50
 typedef struct DateTime{
     int day, month, year;
@@ -20,9 +21,15 @@ void enter(Students &input);
 void printValue(DateTime output);
 void printValue(Student output);
 void printValue(Students output);
+void ascSortByGPA(Students &source);
+void ascSortByName(Students &source);
 int main(){
     Students list;
     enter(list);
+    printValue(list);
+    ascSortByGPA(list);
+    printValue(list);
+    ascSortByName(list);
     printValue(list);
     return 0;
 }
@@ -99,5 +106,29 @@ void printValue(Students output){
     printf("\n list of students:");
     for(int position=0; position<output.amount;position ++){
         printValue(output.students[position]);
+    }
+}
+void ascSortByGPA(Students &source){
+    Student temp;
+    for(int pre=0; pre < source.amount-1;pre++){
+        for(int next = pre+1; next < source.amount;next++){
+            if(source.students[pre].gpa>source.students[next].gpa){
+                temp = source.students[pre];
+                source.students[pre] = source.students[next];
+                source.students[next] = temp;
+            }
+        }
+    }
+}
+void ascSortByName(Students &source){
+    Student temp;
+    for(int pre=0; pre < source.amount-1;pre++){
+        for(int next = pre+1; next < source.amount;next++){
+            if(strcmp(source.students[pre].name, source.students[next].name)>0){
+                temp = source.students[pre];
+                source.students[pre] = source.students[next];
+                source.students[next] = temp;
+            }
+        }
     }
 }
