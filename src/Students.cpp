@@ -18,11 +18,14 @@ bool isValid(DateTime checker);
 void enter(DateTime &current);// sử dụng lại bài sửa rồi
 void enter(Student &input);
 void enter(Students &input);
+int countStudentsHaveScholarship(Students source);
 void printValue(DateTime output);
 void printValue(Student output);
 void printValue(Students output);
+void printAmountStudentsHaveScholarship(Students source);
 void ascSortByGPA(Students &source);
 void ascSortByName(Students &source);
+void digitsStudentsHaveScholarship(Students source);
 int main(){
     Students list;
     enter(list);
@@ -31,6 +34,8 @@ int main(){
     printValue(list);
     ascSortByName(list);
     printValue(list);
+    printAmountStudentsHaveScholarship(list);
+    digitsStudentsHaveScholarship(list);
     return 0;
 }
 void enter(DateTime &date){
@@ -129,6 +134,28 @@ void ascSortByName(Students &source){
                 source.students[pre] = source.students[next];
                 source.students[next] = temp;
             }
+        }
+    }
+}
+int countStudentsHaveScholarship(Students source){
+    int counter = 0;
+    for(int position = 0; position < source.amount;position++){
+        if(source.students[position].gpa>=7){
+            counter++;   
+        }
+    }
+    return counter;
+}
+void printAmountStudentsHaveScholarship(Students source){
+    int counter = countStudentsHaveScholarship(source);
+    printf("\nnumber of students have scholarship: %d",counter);
+}
+void digitsStudentsHaveScholarship(Students source){
+    int counter = 0;
+    printf("\nlist of students have scholarship: ");
+    for(int position = 0; position < source.amount;position++){
+        if(source.students[position].gpa>=7){
+            printValue(source.students[position]);  
         }
     }
 }
