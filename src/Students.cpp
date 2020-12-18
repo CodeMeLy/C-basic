@@ -1,61 +1,77 @@
 #include<stdio.h>
 #define MAXSIZE 50
 typedef struct DateTime{
-    int  day, month, year;
+    int day, month, year;
 };
 typedef struct Student{
-    char name[25];
-    float mark;
-    DateTime birth_of_date;
+    char name[50];
+    float gpa;// diem trung binh
+    DateTime date_of_birth;
 };
 typedef struct Students{
-    Student list[MAXSIZE];
+    Student students[MAXSIZE];
     int amount;
 };
-void enter(DateTime &input);
+bool isLeapYear(int year);
+bool isValid(DateTime checker);
+void enter(DateTime &current);// sử dụng lại bài sửa rồi
 void enter(Student &input);
 void enter(Students &input);
-void printValue(DateTime output);
-void printValue(Student output);
-void printValue(Students output);
 int main(){
     Students list;
     enter(list);
-    printValue(list);
     return 0;
 }
-void enter(DateTime &input){
-    printf("\nenter day, month, year:");
-    scanf("%d%d%d",&input.day,&input.month,&input.year);//NOTE: tụi e có thể copy cái điều kiện nhập vào ngày từ bài trước đã sửa bỏ vào
+void enter(DateTime &date){
+    do{
+        scanf("%d%d%d",&date.day,&date.month,&date.year);
+    }while(!isValid(date));
 }
 void enter(Student &input){
+    fflush(stdin);
     printf("\nenter name:");
-    fflush(stdin);// truoc gets thì thêm câu lệnh này
-    gets(input.name);// nhap vao 1 chuoi
-    printf("enter birth of date:");
-    enter(input.birth_of_date);
-    printf("enter mark:");
-    scanf("%f",&input.mark);
+    gets(input.name);
+    printf("\nenter date of birth:");
+    enter(input.date_of_birth);
+    printf("\nenter GPA:");
+    scanf("%f",&input.gpa);
 }
 void enter(Students &input){
-    printf("enter number of students:");
+    printf("amount of students:");
     scanf("%d",&input.amount);
-    for(int position =0; position < input.amount;position++){
-        printf("enter student at %d", position);
-        enter(input.list[position]);
+    printf("\n enter list of students:");
+    for(int position = 0;position < input.amount;position++){
+        enter(input.students[position]);
     }
 }
-void printValue(DateTime output){
-    printf("%d/%d/%d", output.day, output.month, output.year);
+bool isLeapYear(int year){
+    return year%4 == 0;
 }
-void printValue(Student output){
-    printf("\n%s",output.name);
-    printf(", ");
-    printValue(output.birth_of_date);
-    printf(", %.2f",output.mark);
-}
-void printValue(Students output){
-    for(int position =0; position < output.amount; position++){
-        printValue(output.list[position]);
+bool isValid(DateTime date){
+    bool is_valid = true;
+    if((date.month<1 && date.month >12)||(date.day<1)){
+        is_valid = false;
+    }else{
+        switch(date.month){
+            case 1:case 3: case 5: case 7: case 8: case 10: case 12:
+                if(date.day>31){
+                    is_valid = false;
+                }
+                break;
+            case 4: case 6: case 9: case 11:
+                if(date.day>30){
+                    is_valid = false;
+                }
+                break;
+            case 2: 
+                if(isLeapYear(date.year) && date.day>29){
+                    is_valid = false;
+                }
+                else if(!isLeapYear(date.year) &&date.day>28){
+                    is_valid = false;
+                }
+            break;
+        }
     }
+    return is_valid;
 }
