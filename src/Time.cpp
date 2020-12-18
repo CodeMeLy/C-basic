@@ -40,7 +40,7 @@ void setDateTime(DateTime &date,int day,int month,int year){
 }
 bool isValid(DateTime date){
     bool is_valid = true;
-    if((date.month<1 && date.month >12)||(date.day<1)){
+    if((date.month<1 || date.month >12)||(date.day<1)){
         is_valid = false;
     }else{
         switch(date.month){
