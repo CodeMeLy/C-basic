@@ -28,7 +28,15 @@ int main(){
 }
 void enter(DateTime &date){
     do{
-        scanf("%d%d%d",&date.day,&date.month,&date.year);
+        printf("\nEnter day:");
+        scanf("%d",&date.day);
+        printf("\nEnter month:");
+        scanf("%d",&date.month);
+        printf("\nEnter year:");
+        scanf("%d",&date.year);
+        if(!isValid(date)){
+            printf("nhap lai!");
+        }
     }while(!isValid(date));
 }
 void enter(Student &input){
