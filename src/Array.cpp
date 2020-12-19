@@ -5,10 +5,15 @@ typedef struct Array{
     int size;
 };
 void enter(Array &input);
+Array findEvenNumbers(Array source);
 void printValue(Array output);
+void printEvenNumbers(Array source);
 int main(){
     Array array;
     enter(array);
+    printf("\nprint value of number: ");
+    printValue(array);
+    printEvenNumbers(array);
     return 0;
 }
 void enter(Array &input){
@@ -23,9 +28,24 @@ void enter(Array &input){
     }
 }
 void printValue(Array output){
-    printf("\nprint value of number: ");
     for (int index = 0; index < output.size; index++)
     {
         printf(" %d",output.numbers[index]);
     }    
+}
+Array findEvenNumbers(Array source){
+    Array even_array;
+    even_array.size = 0;
+    for(int index = 0; index < source.size; index++){
+        if(source.numbers[index]%2==0){
+            even_array.size++;
+            even_array.numbers[even_array.size-1] = source.numbers[index];
+        }
+    }
+    return even_array;
+}
+void printEvenNumbers(Array source){
+    Array even_array = findEvenNumbers(source);
+    printf("\n Even numbers in array:");
+    printValue(even_array);
 }
