@@ -5,15 +5,19 @@ typedef struct Array{
     int size;
 };
 void enter(Array &input);
+bool isPrimeNumber(int &check_number);
+Array findPrimeNumbers(Array source);
 Array findEvenNumbers(Array source);
 void printValue(Array output);
 void printEvenNumbers(Array source);
+void printPrimeNumbers(Array source);
 int main(){
     Array array;
     enter(array);
     printf("\nprint value of number: ");
     printValue(array);
     printEvenNumbers(array);
+    printPrimeNumbers(array);
     return 0;
 }
 void enter(Array &input){
@@ -33,6 +37,16 @@ void printValue(Array output){
         printf(" %d",output.numbers[index]);
     }    
 }
+bool isPrimeNumber(int &check_number){
+    bool is_prime_number = true;
+    for(int previous_number = 2; previous_number<check_number;previous_number++){
+        if(check_number%previous_number==0){
+            is_prime_number = false;
+            break;
+        }
+    }
+    return is_prime_number;
+}
 Array findEvenNumbers(Array source){
     Array even_array;
     even_array.size = 0;
@@ -44,8 +58,25 @@ Array findEvenNumbers(Array source){
     }
     return even_array;
 }
+Array findPrimeNumbers(Array source){
+    Array prime_array;
+    prime_array.size = 0;
+    for(int index = 0;index < source.size;index++){
+        int check_number = source.numbers[index];
+        if(isPrimeNumber(check_number)){
+            prime_array.size++;
+            prime_array.numbers[prime_array.size-1] = check_number;
+        }
+    }
+    return prime_array;
+}
 void printEvenNumbers(Array source){
     Array even_array = findEvenNumbers(source);
     printf("\n Even numbers in array:");
     printValue(even_array);
+}
+void printPrimeNumbers(Array source){
+    Array prime_array = findPrimeNumbers(source);
+    printf("\nPrime numbers in array:");
+    printValue(prime_array);
 }
