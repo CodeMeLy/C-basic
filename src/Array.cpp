@@ -9,6 +9,7 @@ bool isPrimeNumber(int &check_number);
 Array findPrimeNumbers(Array source);
 Array findEvenNumbers(Array source);
 void printValue(Array output);
+int printNumberOfPrimeNumbers(Array source);
 void printEvenNumbers(Array source);
 void printPrimeNumbers(Array source);
 int main(){
@@ -18,6 +19,7 @@ int main(){
     printValue(array);
     printEvenNumbers(array);
     printPrimeNumbers(array);
+    printNumberOfPrimeNumbers(array);
     return 0;
 }
 void enter(Array &input){
@@ -79,4 +81,8 @@ void printPrimeNumbers(Array source){
     Array prime_array = findPrimeNumbers(source);
     printf("\nPrime numbers in array:");
     printValue(prime_array);
+}
+int printNumberOfPrimeNumbers(Array source){
+    Array prime_array = findPrimeNumbers(source);
+    printf("\namount prime numbers: %d",prime_array.size);
 }
