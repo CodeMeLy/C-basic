@@ -1,5 +1,7 @@
 # danh sách file
 - IntergeNumber.cpp: làm việc với số nguyên
+1. viết hàm nhập 2 số nguyên
+2. xuất tổng, hiệu, tích, thương, lũy thừa hai số nguyên
 - Array.cpp: struct mảng một chiều
 - Complex.cpp: struct số phức
 - Fraction.cpp: struct phân số
