@@ -5,14 +5,16 @@ enum Selector{
     DIGITS_EVEN_NUMBER = 5, DIGITS_ODD_NUMBER = 6,DIGITS_EVEN_POSITION = 7,DIGITS_ODD_POSITION = 8,DIGITS_POSITION = 9,DIGITS_PRIME = 10, 
     ASC_SORT = 11, DESC_SORT =12
 };
+enum OrderSort{
+    ASC = 1, DESC = 2
+};
 int swap(int &source, int &dest);
 bool isPrimeNumber(int &check_number);
 void enter(int numbers[],int &amount_numbers);
 int findMaxValue(int numbers[], int amount_numbers);
 int finMinValue(int numbers[], int amount_numbers);
 int countNumberOfPrimeNumbers(int numbers[], int amount_numbers);
-void ascSort(int numbers[],int amount_numbers);
-void descSort(int numbers[],int amount_numbers);
+void sort(int numbers[],int amount_numbers, OrderSort order = ASC);
 void printValues(int numbers[], int amount_numbers);
 void printMaxValue(int numbers[], int amount_numbers);
 void printMinValue(int numbers[], int amount_numbers);
@@ -96,20 +98,21 @@ int findMinValue(int numbers[], int amount_numbers){
     }
     return min;
 }
-void ascSort(int numbers[],int amount_numbers){
-    for(int index = 0; index < amount_numbers-1;index++){
-        for(int next_index = index+1;next_index<amount_numbers;next_index++){
-            if(numbers[index]>numbers[next_index]){
-                swap(numbers[index],numbers[next_index]);// hoán vị 2 số
-            }
+void sort(int numbers[],int amount_numbers, OrderSort order){
+    if(order == DESC){
+        for(int index = 0; index < amount_numbers-1;index++){
+            for(int next_index = index+1;next_index<amount_numbers;next_index++){
+                if(numbers[index]<numbers[next_index]){
+                    swap(numbers[index],numbers[next_index]);// hoán vị 2 số
+                }
+            }   
         }
-    }
-}
-void descSort(int numbers[],int amount_numbers){
-    for(int index = 0; index < amount_numbers-1;index++){
-        for(int next_index = index+1;next_index<amount_numbers;next_index++){
-            if(numbers[index]<numbers[next_index]){
-                swap(numbers[index],numbers[next_index]);// hoán vị 2 số
+    } else{
+        for(int index = 0; index < amount_numbers-1;index++){
+            for(int next_index = index+1;next_index<amount_numbers;next_index++){
+                if(numbers[index]>numbers[next_index]){
+                    swap(numbers[index],numbers[next_index]);// hoán vị 2 số
+                }
             }
         }
     }
@@ -229,11 +232,11 @@ void menu(int numbers[], int amount_numbers){
                 digitsPrimeNumbers(numbers,amount_numbers);
                 break;
             case ASC_SORT:
-                ascSort(numbers,amount_numbers);
+                sort(numbers,amount_numbers);
                 printValues(numbers,amount_numbers);
                 break;
             case DESC_SORT:
-                descSort(numbers,amount_numbers);
+                sort(numbers,amount_numbers,DESC);
                 printValues(numbers,amount_numbers);
                 break;
             default:
