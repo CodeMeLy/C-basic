@@ -3,6 +3,7 @@
 #define MAX_COL 50
 void enter(float matrix[MAX_ROW][MAX_COL], int &amount_rows, int &amount_columns);
 void printMatrix(float matrix[MAX_ROW][MAX_COL], int amount_rows, int amount_columns);
+bool isSquareMatrix(int amount_rows, int amount_columns);// là ma trận vuông
 int main(){
     float matrix[MAX_ROW][MAX_COL];
     int amount_rows, amount_columns;
@@ -31,4 +32,7 @@ void printMatrix(float matrix[MAX_ROW][MAX_COL], int amount_rows, int amount_col
         }
         printf("\n");
     }
+}
+bool isSquareMatrix(int amount_rows, int amount_columns){
+    return amount_rows == amount_columns;
 }
